@@ -18,7 +18,7 @@ import java.util.UUID;
 public class JmsSender {
 
     @Autowired
-    @Qualifier("jmsQueueTemplate")
+    @Qualifier("jmsTopicTemplate")
     protected JmsTemplate jmsTemplate;
 
     public void sendMessage(final String message) {

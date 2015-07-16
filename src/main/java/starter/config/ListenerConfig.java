@@ -16,11 +16,13 @@ public class ListenerConfig {
 
     @Bean
     @Autowired
-    public MessageListenerContainer getMessageListenerContainer(Queue destination, ConnectionFactory connectionFactory) throws Exception {
+    public MessageListenerContainer getMessageListenerContainer(Topic destination, ConnectionFactory connectionFactory) throws Exception {
         DefaultMessageListenerContainer listenerContainer = new DefaultMessageListenerContainer();
         listenerContainer.setConnectionFactory(connectionFactory);
         listenerContainer.setDestination(destination);
         listenerContainer.setMessageListener(new JmsListener());
+        listenerContainer.setSubscriptionDurable(true);
+        //listenerContainer.setDurableSubscriptionName("durableSub");
         return listenerContainer;
     }
 }
