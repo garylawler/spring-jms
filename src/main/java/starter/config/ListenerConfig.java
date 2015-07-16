@@ -28,7 +28,7 @@ public class ListenerConfig {
         DefaultMessageListenerContainer listenerContainer = createDefaultMessageListenerContainer(destination, connectionFactory);
         listenerContainer.setMessageListener(new JmsListener());
         listenerContainer.setSubscriptionDurable(true);
-        //listenerContainer.setDurableSubscriptionName("durableSub");
+        listenerContainer.setDurableSubscriptionName("durableSub"); // defaults to class name if not set
         return listenerContainer;
     }
 
