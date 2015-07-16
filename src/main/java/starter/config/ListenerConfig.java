@@ -3,8 +3,10 @@ package starter.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jms.connection.JmsTransactionManager;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.jms.listener.MessageListenerContainer;
+import org.springframework.transaction.PlatformTransactionManager;
 import starter.app.listener.JmsListener;
 
 import javax.jms.ConnectionFactory;
@@ -38,5 +40,11 @@ public class ListenerConfig {
         DefaultMessageListenerContainer listenerContainer = createDefaultMessageListenerContainer(destination, connectionFactory);
         listenerContainer.setMessageListener(new JmsListener());
         return listenerContainer;
+    }
+
+    @Bean
+    @Autowired
+    public JmsTransactionManager getJmsTransactionManager(ConnectionFactory connectionFactory) {
+        return new JmsTransactionManager(connectionFactory);
     }
 }

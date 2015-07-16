@@ -13,7 +13,7 @@ import javax.jms.Message;
 import javax.jms.Session;
 import java.util.UUID;
 
-public abstract class AbstractJmsSender {
+public abstract class JmsSenderTemplate {
 
     public final void sendMessage(final String message) {
         final CustomMessage customMessage = new CustomMessage(message);
