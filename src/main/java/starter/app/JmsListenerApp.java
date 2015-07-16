@@ -12,8 +12,5 @@ public class JmsListenerApp {
         AnnotationConfigApplicationContext springContext = new AnnotationConfigApplicationContext();
         springContext.register(TemplateConfig.class, ActiveMQConfig.class, ListenerConfig.class);
         springContext.refresh();
-
-        MessageListenerContainer jmsListener = springContext.getBean(MessageListenerContainer.class);
-        jmsListener.start();
     }
 }

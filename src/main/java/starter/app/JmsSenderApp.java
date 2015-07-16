@@ -1,7 +1,8 @@
 package starter.app;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import starter.app.sender.JmsSender;
+import starter.app.sender.JmsQueueSender;
+import starter.app.sender.JmsTopicSender;
 import starter.config.ActiveMQConfig;
 import starter.config.TemplateConfig;
 
@@ -12,11 +13,14 @@ public class JmsSenderApp {
         springContext.register(TemplateConfig.class, ActiveMQConfig.class);
         springContext.refresh();
 
-        JmsSender jmsSender = springContext.getBean(JmsSender.class);
+        JmsTopicSender jmsTopicSender = springContext.getBean(JmsTopicSender.class);
+        JmsQueueSender jmsQueueSender = springContext.getBean(JmsQueueSender.class);
 
         while(true) {
-            jmsSender.sendMessage("this is the message");
-            Thread.sleep(10000);
+            jmsTopicSender.sendMessage("this is a topic message");
+            Thread.sleep(5000);
+            jmsQueueSender.sendMessage("this is a queue message");
+            Thread.sleep(5000);
         }
     }
 }

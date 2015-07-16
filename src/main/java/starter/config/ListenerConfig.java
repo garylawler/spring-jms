@@ -8,21 +8,35 @@ import org.springframework.jms.listener.MessageListenerContainer;
 import starter.app.listener.JmsListener;
 
 import javax.jms.ConnectionFactory;
+import javax.jms.Destination;
 import javax.jms.Queue;
 import javax.jms.Topic;
 
 @Configuration
 public class ListenerConfig {
 
-    @Bean
-    @Autowired
-    public MessageListenerContainer getMessageListenerContainer(Topic destination, ConnectionFactory connectionFactory) throws Exception {
+    private DefaultMessageListenerContainer createDefaultMessageListenerContainer(Destination destination, ConnectionFactory connectionFactory) {
         DefaultMessageListenerContainer listenerContainer = new DefaultMessageListenerContainer();
         listenerContainer.setConnectionFactory(connectionFactory);
         listenerContainer.setDestination(destination);
+        return listenerContainer;
+    }
+
+    @Bean
+    @Autowired
+    public MessageListenerContainer getTopicMessageListenerContainer(Topic destination, ConnectionFactory connectionFactory) throws Exception {
+        DefaultMessageListenerContainer listenerContainer = createDefaultMessageListenerContainer(destination, connectionFactory);
         listenerContainer.setMessageListener(new JmsListener());
         listenerContainer.setSubscriptionDurable(true);
         //listenerContainer.setDurableSubscriptionName("durableSub");
+        return listenerContainer;
+    }
+
+    @Bean
+    @Autowired
+    public MessageListenerContainer getQueueMessageListenerContainer(Queue destination, ConnectionFactory connectionFactory) throws Exception {
+        DefaultMessageListenerContainer listenerContainer = createDefaultMessageListenerContainer(destination, connectionFactory);
+        listenerContainer.setMessageListener(new JmsListener());
         return listenerContainer;
     }
 }
