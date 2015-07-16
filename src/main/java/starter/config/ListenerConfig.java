@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.connection.JmsTransactionManager;
 import org.springframework.jms.listener.DefaultMessageListenerContainer;
 import org.springframework.jms.listener.MessageListenerContainer;
-import org.springframework.transaction.PlatformTransactionManager;
 import starter.app.listener.JmsListener;
 
 import javax.jms.ConnectionFactory;
