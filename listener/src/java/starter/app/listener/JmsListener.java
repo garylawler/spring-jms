@@ -1,8 +1,8 @@
 package starter.app.listener;
 
 import org.springframework.stereotype.Component;
-import starter.app.model.JmsPropertyConstants;
 import starter.app.model.CustomMessage;
+import starter.app.model.JmsPropertyConstants;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
