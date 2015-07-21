@@ -18,9 +18,9 @@ public class JmsSenderApp {
 
         while(true) {
             jmsTopicSender.sendMessage("this is a topic message");
-            Thread.sleep(5000);
+            Thread.sleep(1000);
             jmsQueueSender.sendMessage("this is a queue message");
-            Thread.sleep(5000);
+            Thread.sleep(1000);
         }
     }
 }
