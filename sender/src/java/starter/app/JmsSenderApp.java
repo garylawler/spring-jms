@@ -4,14 +4,13 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import starter.app.sender.JmsQueueSender;
 import starter.app.sender.JmsTopicSender;
 import starter.config.ActiveMQConfig;
-import starter.config.ListenerConfig;
 import starter.config.TemplateConfig;
 
 public class JmsSenderApp {
 
     public static void main(String[] args) throws InterruptedException {
         AnnotationConfigApplicationContext springContext = new AnnotationConfigApplicationContext();
-        springContext.register(TemplateConfig.class, ActiveMQConfig.class, ListenerConfig.class);
+        springContext.register(TemplateConfig.class, ActiveMQConfig.class);
         springContext.refresh();
 
         JmsTopicSender jmsTopicSender = springContext.getBean(JmsTopicSender.class);
