@@ -17,9 +17,9 @@ public class JmsSenderApp {
         JmsQueueSender jmsQueueSender = springContext.getBean(JmsQueueSender.class);
 
         while(true) {
-            jmsTopicSender.sendMessage("this is a topic message");
+            jmsTopicSender.sendSimpleMessage("this is a topic message");
             Thread.sleep(1000);
-            jmsQueueSender.sendMessage("this is a queue message");
+            jmsQueueSender.sendSimpleMessage("this is a queue message");
             Thread.sleep(1000);
         }
     }

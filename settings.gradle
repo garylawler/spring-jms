@@ -1,3 +1,1 @@
-include 'common'
-include 'sender'
-include 'listener'
+include ':common', ':listener', ':sender'

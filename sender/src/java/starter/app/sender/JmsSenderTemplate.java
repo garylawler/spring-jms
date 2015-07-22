@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public abstract class JmsSenderTemplate {
 
-    public final void sendMessage(final String message) {
+    public final void sendSimpleMessage(final String message) {
         final CustomMessage customMessage = new CustomMessage(message);
 
         getJmsTemplate().send(new MessageCreator() {
@@ -27,6 +27,22 @@ public abstract class JmsSenderTemplate {
             }
         });
     }
+//
+//    public final void sendComplexMessage(final String message) {
+//        final CustomMessage customMessage = new CustomMessage(message);
+//
+//        getJmsTemplate().convertAndSend((Object) message, new MessagePostProcessor() {
+//            @Override
+//            public Message postProcessMessage(Message message) throws JMSException {
+//                message.setStringProperty(JmsPropertyConstants.THE_MESSAGE, customMessage.getMyMessage());
+//                message.setJMSCorrelationID(UUID.randomUUID().toString());
+//                message.setJMSMessageID(UUID.randomUUID().toString());
+//                configureMessage(message);
+//                System.out.println("Sending message:" + customMessage.getMyMessage());
+//                return message;
+//            }
+//        });
+//    }
 
     abstract protected JmsTemplate getJmsTemplate();
 
